@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -60,6 +60,550 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-面向对象总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/28/面向对象总结/" class="article-date">
+  <time datetime="2016-08-27T16:00:00.000Z" itemprop="datePublished">2016-08-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/28/面向对象总结/">ajax总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h1><h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h2><ol>
+<li><p>JavaScript是什么</p>
+<ul>
+<li>一门编程语言</li>
+<li>JavaScript的运行环境：浏览器–&gt;内核（渲染引擎;js解析器）</li>
+</ul>
+</li>
+<li><p>JavaScript组成</p>
+<ul>
+<li>JavaScript核心标准：ECMAScript</li>
+<li>DOM</li>
+<li>BOM</li>
+</ul>
+</li>
+<li><p>JavaScript可以做什么</p>
+<ul>
+<li>操作DOM元素</li>
+<li>对DOM节点进行增删改查</li>
+</ul>
+</li>
+<li><p>JavaScript中的数据类型</p>
+<ul>
+<li><p>基本类型</p>
+<p>number   string   boolean   null   undefined</p>
+</li>
+<li><p>引用类型</p>
+<p>object   (Array   Date   Math(比较特殊)   RegExp(正则) Function    Object   Error   Number   String boolent   XMLHttpRequest)</p>
+</li>
+<li><p>基本类型与引用类型的差别</p>
+<ul>
+<li>存储方式不同：基本类型数据存储在栈stack，引用类型存储在堆heap。</li>
+<li>赋值不同：基本类型赋值的时候传的是值，引用类型赋值的时候传的是地址。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="代码的异常处理"><a href="#代码的异常处理" class="headerlink" title="代码的异常处理"></a>代码的异常处理</h2><ol>
+<li><p>作用</p>
+<ul>
+<li>为了解决某段代码出错影响下面的代码执行。</li>
+<li>屏蔽底层的报错细节，从而给用户一个友好提示。</li>
+</ul>
+</li>
+<li><p>执行代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">try&#123;</div><div class="line">	异常代码</div><div class="line">&#125;catch(e)&#123;</div><div class="line">	//e.message表示错误原因</div><div class="line">	console.log(e.message);</div><div class="line">	//e.name表示错误类型</div><div class="line">	console.log(e.name);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>用户友好代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">try&#123;</div><div class="line">	//try当中的代码一旦发生错误，try当中之后代码就不再执行了</div><div class="line">	var data = false;</div><div class="line">	if(!data)&#123;</div><div class="line">		throw new Error(&apos;数据格式错误&apos;);</div><div class="line">	&#125;</div><div class="line">&#125;catch(e)&#123;</div><div class="line">	//只有try当中的代码发生错误，这里才会执行</div><div class="line">	//e.message表示错误原因</div><div class="line">	console.log(e.message);</div><div class="line">	//e.name表示错误类型</div><div class="line">	console.log(e.name);</div><div class="line">	if(e.name==&apos;Error&apos;)&#123;</div><div class="line">		onload = function()&#123;</div><div class="line">			var info = document.getElementById(&apos;info&apos;);</div><div class="line">			info.innerHTML = e.message;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;finally&#123;</div><div class="line">	//无论try当中的代码是否执行，这里都会执行</div><div class="line">	console.log(&quot;asd&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><ol>
+<li><p>什么是对象</p>
+<ul>
+<li>所谓的对象就是某种事物<ul>
+<li>具体就是汽车，老虎，花草树木等等</li>
+<li>抽象一点就是情感，思维方式等等</li>
+</ul>
+</li>
+<li>用程序的方式描述对象<ul>
+<li>属性</li>
+<li>行为</li>
+</ul>
+</li>
+<li>对象属性的访问方式<ul>
+<li>对象.属性名称的方式</li>
+<li>对象[‘属性名称’]  中括号里面可以使用变量</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>对象的创建方式</p>
+<ul>
+<li><p>通过构造函数new</p>
+<ul>
+<li><p>如果构造函数不需要传递参数，那么后面的括号可以省略</p>
+<p>var obj = new Object();  和   var obj = new Object;一样</p>
+</li>
+<li><p>构造函数实例化对象本质上做了什么工作</p>
+<ul>
+<li><p>开辟堆内存，用于存储实例中的数据(属性和方法)</p>
+</li>
+<li><p>用this(构造函数中的this指的是构造函数所创建的实例对象)指向该区域</p>
+</li>
+<li><p>通过this指向该区域中放置数据</p>
+</li>
+<li><p>返回this</p>
+</li>
+<li><p>构造函数默认的返回值是this</p>
+<p><strong>构造函数如果显示的返回基本数据类型，那么和不返回是一样的</strong></p>
+<p><strong>构造函数如果显示的返回引用数据类型，那么就以此为准，就不再返回默认的this了</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>字面量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var obj =&#123;username:&apos;张三&apos;，age:12&#125;;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>对象的本质：无序的键值对集合</p>
+</li>
+<li><p>原型</p>
+<ul>
+<li>本质：函数都有一个原型属性prototype，该属性的值本质上也是对象(实际就是Object的实例)</li>
+<li>作用：实现资源共享(实例与实例之间共享)和实现继承。</li>
+<li><em> </em> proto <em> </em> 属性<ul>
+<li>构造函数产生的实例对象都有一个属性 <em> </em> proto <em> </em> ,该属性不是标准属性，不可以再编程中使用，实际上，该属性是浏览器内部使用的，该属性和构造函数中的prototype指向相同。</li>
+<li><em> </em> proto <em> </em> 属性在实例对象中和prototype属性在构造函数中指向相同。</li>
+<li>通过对象.属性名称=值  这种做法会向对象中添加一个属性但是obj.arr.push(123);这种结果不会在obj中添加属性，而会找到obj.arr并且在obj.arr数组中添加一项数据。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>对象的体系结构</p>
+<ul>
+<li>所有的实例对象都有一个_ <em>proto </em>  _属性，该属性指向产生实例对象的构造函数的原型</li>
+<li>所有的构造函数都有一个prototype属性，该属性本质上也是一个对象（Object的实例对象）</li>
+<li>素有的原型对象都有一个constructor属性，该属性指向原型所属的构造函数</li>
+<li>原型对象中有一个<em> </em> proto <em> </em> 属性，该属性指向Object.prototype（Object的原型对象中没有 <em> </em> proto <em> </em> ，因为这里就是原型链的终点）</li>
+<li>所有的函数都是Function的实例对象</li>
+<li>Function本身也是自己的实例对象（也就是Function. <em> </em> proto <em> </em> =Function.prototyp）</li>
+</ul>
+</li>
+<li><p>对象分类</p>
+<ul>
+<li><p>本地对象</p>
+<p>独立于宿主环境（浏览器）的对象：Array、Date、String、Boolean、RegExp、Function、Object、Error</p>
+</li>
+<li><p>内置对象</p>
+<p>Math、Global（window）</p>
+</li>
+<li><p>宿主对象</p>
+<p>浏览器提供的对象：DOM、BOM自定义对象</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="面向对象-1"><a href="#面向对象-1" class="headerlink" title="面向对象"></a>面向对象</h2><ol>
+<li><p>JavaScript面向对象相关概念</p>
+<ul>
+<li>构造函数</li>
+<li>实例对象</li>
+<li>原型</li>
+</ul>
+</li>
+<li><p>面向过程</p>
+<ul>
+<li>是一种原先的开发方式</li>
+<li>团队开发容易产生命名冲突</li>
+<li>不方便代码的重用</li>
+</ul>
+</li>
+<li><p>对象中属性的判断</p>
+<ul>
+<li><p>hasOwnProperty()：属性在实例上就返回true，在原型上返回false。</p>
+<p>用于判断属性是否存在于原型上</p>
+</li>
+<li><p>全局作用域中的变量和函数都是window对象的成员</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="对于-和-的一些比较"><a href="#对于-和-的一些比较" class="headerlink" title="对于==和===的一些比较"></a>对于==和===的一些比较</h2><ol>
+<li><p>单个空对象转化成布尔值是true</p>
+</li>
+<li><p>数组与布尔值的比较会转换成数值的比较</p>
+<p>空数组会转化成0</p>
+<p>空对象不会转化</p>
+<p>这里有一个例子：例：console.log([]==![]);  后边优先级高，先算后边。空对象是true，取反为false，在遵循第二条规则，为true</p>
+</li>
+<li><p>对象之间的比较比较的是内存地址</p>
+</li>
+<li><p>转成false的情况：false null “” undefined 0 NaN</p>
+</li>
+</ol>
+<h2 id="变量提升问题"><a href="#变量提升问题" class="headerlink" title="变量提升问题"></a>变量提升问题</h2><ol>
+<li>声明变量的时候如果不添加var不会参与预解析，但是也会向window中添加属性</li>
+<li>window中本身就有一个属性undefined，并且undefined的值也是undefined</li>
+</ol>
+<h2 id="构造函数、实例对象与原型之间的关系"><a href="#构造函数、实例对象与原型之间的关系" class="headerlink" title="构造函数、实例对象与原型之间的关系"></a>构造函数、实例对象与原型之间的关系</h2><ol>
+<li><p>构造函数中都有原型属性prototype,该属性本身也是对象（Object对象）</p>
+</li>
+<li><p>原型对象中都有一个属性叫constructor，该属性指向原型所属的构造函数</p>
+</li>
+<li><p>实例对象都有一个属性 <em> </em> proto <em> </em> ，该属性不是标准属性，不可以再编程中使用，实际上是浏览器内部使用的，并且该属性指向原型对象</p>
+<p>通过上面三条原理可以总结出一个概念：原型链</p>
+<ul>
+<li><p>实例对象和原型对象之间形成的链式结构，该链式结构通过 <em> </em> proto <em> </em> 链接起来</p>
+</li>
+<li><p><em> </em> proto <em> </em> 存在的价值就是把原型链的节点连接起来</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var c = new Car(&apos;奥迪&apos;,&apos;black&apos;);</div><div class="line">//c -&gt; Car.prototype -&gt; Object.prototype -&gt; null</div><div class="line"></div><div class="line">var obj = new Object();</div><div class="line">// obj -&gt; Object.prototype -&gt; null</div><div class="line"></div><div class="line">var arr = new Array();</div><div class="line">// arr -&gt; Array.prototype -&gt; Object.prototype -&gt; null</div><div class="line"></div><div class="line">var date = new Date();</div><div class="line">// date -&gt; Date.prototype -&gt; Object.prototype -&gt; null</div></pre></td></tr></table></figure>
+</li>
+<li><p>原型链的结构可以通过重置原型对象的方式来修改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">function Foo1(info)&#123;</div><div class="line">        this.info = info;</div><div class="line">    &#125;</div><div class="line">    Foo2.prototype = new Foo1(&apos;tom&apos;);</div><div class="line">    Foo2.prototype.constructor = Foo1;</div><div class="line">    function Foo2(info)&#123;</div><div class="line">        this.info = info;</div><div class="line">    &#125;</div><div class="line">    Foo3.prototype = new Foo2(&apos;jerry&apos;);</div><div class="line">    // Foo3.prototype.constructor = Foo2;</div><div class="line">    function Foo3(info)&#123;</div><div class="line">        this.info = info;</div><div class="line">    &#125;</div><div class="line">    var f = new Foo3(&apos;spike&apos;);</div><div class="line">    console.dir(f);</div><div class="line"></div><div class="line">    // f -&gt; new Foo2(&apos;jerry&apos;) -&gt; new Foo1(&apos;tom&apos;) -&gt; Foo1.prototype -&gt; Object.prototype -&gt; null</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><ol>
+<li><p>本质上就是代码的复用</p>
+</li>
+<li><p>继承方法</p>
+<ul>
+<li><p>原型继承</p>
+<p>继承过来的引用类型的数据，所有的实例是共享的。</p>
+<p>缺点：没有办法给继承过来的属性赋值，而不是影响所有的实例。</p>
+</li>
+<li><p>借用构造函数继承</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">function Person(name,favour)&#123;</div><div class="line">        this.name = name;</div><div class="line">        this.favour = favour;</div><div class="line">    &#125;</div><div class="line">    Person.prototype.showName = function()&#123;</div><div class="line">        console.log(this.name);</div><div class="line">    &#125;</div><div class="line">    function Student(num,name,favour)&#123;</div><div class="line">        // 这里的this是Student构造函数的实例</div><div class="line">        // Person.call(this,name,favour);</div><div class="line">        Person.apply(this,[name,favour]);</div><div class="line">        this.num = num;</div><div class="line">    &#125;</div><div class="line">    var stu1 = new Student(1,&apos;zhangsan&apos;,[&apos;coding&apos;]);</div><div class="line">    stu1.favour.push(&apos;swimming&apos;);</div><div class="line">    var stu2 = new Student(2,&apos;lisi&apos;,[&apos;dancing&apos;]);</div><div class="line">    // console.dir(stu1);</div><div class="line">    // console.dir(stu2);</div><div class="line">    stu1.showName();</div></pre></td></tr></table></figure>
+<p>缺点：没有办法继承父级构造函数原型上的成员</p>
+</li>
+<li><p>组合继承</p>
+<p>原型继承和借用构造函数的组合</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">function Person(name,favour)&#123;</div><div class="line">        this.name = name;</div><div class="line">        this.favour = favour;</div><div class="line">    &#125;</div><div class="line">    Person.prototype.showFavour = function()&#123;</div><div class="line">        console.log(this.favour);</div><div class="line">    &#125;</div><div class="line">    Person.prototype.flag = 1;</div><div class="line"></div><div class="line">    function Teacher(name,favour,level)&#123;</div><div class="line">        Person.call(this,name,favour);</div><div class="line">        this.level = level;</div><div class="line">    &#125;</div><div class="line">    Teacher.prototype = new Person();</div><div class="line"></div><div class="line">    var tea = new Teacher(&apos;zhangsan&apos;,[&apos;coding&apos;],&apos;T5&apos;);</div><div class="line">    var tea1 = new Teacher(&apos;lisi&apos;,[&apos;swimming&apos;],&apos;T4&apos;);</div><div class="line">    tea.favour.push(&apos;singing&apos;);</div><div class="line">    tea.showFavour();</div><div class="line">    tea.flag = 2;</div><div class="line">    console.log(tea.flag);</div><div class="line">    tea1.showFavour();</div><div class="line">    console.log(tea1.flag);</div><div class="line">    console.log(tea1);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="ES5新特性"><a href="#ES5新特性" class="headerlink" title="ES5新特性"></a>ES5新特性</h2><ul>
+<li><p>Object.create();</p>
+<p>作用：创建对象</p>
+<p>var obj = Object.create(null); 这个对象里面什么也没有；而var stu = new Object();这个对象里面至少还有一个 <em> </em> proto <em> </em> 。</p>
+<p>实际上在创建对象的时候，传入的参数相当于在内部把这个函数的原型指向了这个参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">function create(param)&#123;</div><div class="line">    function Foo()&#123;&#125;</div><div class="line">    Foo.prototype = param;</div><div class="line">    return new Foo();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="属性复制"><a href="#属性复制" class="headerlink" title="属性复制"></a>属性复制</h2><ol>
+<li><p>利用for  in可以实现拷贝，没有的属性添加，有的属性覆盖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">var obj = &#123;&#125;;</div><div class="line">    obj.info = &apos;hello&apos;;</div><div class="line">    obj.extend = function(o)&#123;</div><div class="line">        for(var key in o)&#123;</div><div class="line">           this[key] = o[key];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    obj.extend(&#123;</div><div class="line">       name : &apos;lisi&apos;,</div><div class="line">       favour : &apos;coding&apos;,</div><div class="line">        info : &apos;nihao&apos;</div><div class="line">    &#125;);</div><div class="line">console.dir(obj);</div></pre></td></tr></table></figure>
+</li>
+<li><p>$.extend(true,参数1，参数2，参数3，参数4…);</p>
+<ul>
+<li>第一个参数是拷贝下来所有的数据，以防复制的时候丢失（深拷贝）</li>
+<li>第二个参数是被复制的对象</li>
+<li>从第三个参数往后全是向第二个参数复制的对象</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">function foo(set)&#123;</div><div class="line">    var defaultSettings = &#123;</div><div class="line">        width : &apos;100&apos;,</div><div class="line">        height : &apos;200&apos;,</div><div class="line">        backgroundColor : &apos;gray&apos;,</div><div class="line">        sets : &#123;</div><div class="line">            flag : 12,</div><div class="line">            abc : &apos;message&apos;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    var obj = &#123;</div><div class="line">        www : &apos;www&apos;</div><div class="line">    &#125;</div><div class="line">    var obj1 = &#123;</div><div class="line">        qqq : &apos;qqq&apos;</div><div class="line">    &#125;</div><div class="line">    $.extend(true,defaultSettings,set,obj,obj1);</div><div class="line">    console.dir(defaultSettings);</div><div class="line">    console.log(defaultSettings.width);</div><div class="line">    console.log(defaultSettings.sets.flag);</div><div class="line">    console.log(defaultSettings.sets.abc);</div><div class="line">&#125;</div><div class="line">var settings = &#123;</div><div class="line">    width : &apos;1000&apos;,</div><div class="line">    sets : &#123;</div><div class="line">        flag : 123,</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">foo(settings);</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><ol>
+<li><p>所有函数都是Function的实例</p>
+<p>并且Function也是一个函数，Function也是Function的一个实例。Function里面的prototype和<strong>proto</strong>是一样的。</p>
+<p><img src="C:\前端\截图\01.bmp" alt="01"></p>
+</li>
+<li><p>对象的体系结构（上文提到过，写在这里是可以对应上图）</p>
+<ul>
+<li>所有的实例对象都有一个_ <em>proto </em>  _属性，该属性指向产生实例对象的构造函数的原型</li>
+<li>所有的构造函数都有一个prototype属性，该属性本质上也是一个对象（Object的实例对象）</li>
+<li>素有的原型对象都有一个constructor属性，该属性指向原型所属的构造函数</li>
+<li>原型对象中有一个<em> </em> proto <em> </em> 属性，该属性指向Object.prototype（Object的原型对象中没有 <em> </em> proto <em> </em> ，因为这里就是原型链的终点）</li>
+<li>所有的函数都是Function的实例对象</li>
+<li>Function本身也是自己的实例对象（也就是Function. <em> </em> proto <em> </em> =Function.prototyp）</li>
+</ul>
+</li>
+<li><p>函数的三种角色（个人理解）</p>
+<ul>
+<li><p>构造函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">function Foo()&#123;&#125;</div><div class="line">var foo = new Foo();</div></pre></td></tr></table></figure>
+</li>
+<li><p>普通函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function sum(n)&#123;</div><div class="line">  var total = 0;</div><div class="line">  for(var i=0;i&lt;n;i++)&#123;</div><div class="line">    total += i;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">sum(100);</div></pre></td></tr></table></figure>
+</li>
+<li><p>函数作为对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var obj = &#123;&#125;;</div><div class="line">obj.flag = 1;</div><div class="line">obj.username = &apos;lisi&apos;;</div></pre></td></tr></table></figure>
+<p>函数到底是什么角色取决于什么呢–&gt;函数的调用方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">在这里举一个例子：</div><div class="line">function FruitMachine(fruit)&#123;</div><div class="line">        this.fruit = fruit;</div><div class="line">        this.produceJuice = function()&#123;</div><div class="line">            console.log(this.fruit + &apos;juice&apos;);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    FruitMachine.brand = &apos;九阳&apos;;</div><div class="line">    var apple = new FruitMachine(&apos;apple&apos;);</div><div class="line">    var orange = new FruitMachine(&apos;orange&apos;);</div><div class="line">    console.dir(apple);</div><div class="line">    这里并不能访问到brand属性，也就是说，以构造函数的形式创建的实例对象无法访问到后续以对象的方式添加的属性。</div><div class="line">    // console.log(apple.brand);</div><div class="line">    //这样可以访问</div><div class="line">    console.log(FruitMachine.brand);</div><div class="line">    apple.produceJuice();</div><div class="line">    orange.produceJuice();</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>定义函数的方式</p>
+<p><strong>函数都是对象；对象不一定是函数</strong></p>
+<ul>
+<li><p>系统函数（类库、函数库）</p>
+</li>
+<li><p>自定义</p>
+<ul>
+<li><p>函数声明</p>
+<p>函数声明是在预解析阶段创建的，所以函数可以先调用后定义，并且函数声明只能在全局或者函数内部定义。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">function foo()&#123;</div><div class="line">  console.log(123);</div><div class="line">&#125;</div><div class="line">foo();</div></pre></td></tr></table></figure>
+</li>
+<li><p>函数表达式</p>
+<p>函数表达式是在程序执行阶段创建的，并且函数表达式只能在表达式中定义。在复杂的表达式中可以通过分支判断的方式选择性声明函数表达式（在这种情况下函数一般只需要一个，这样可以节省内存开销）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var fn = function()&#123;</div><div class="line">    console.log(456);</div><div class="line">&#125;</div><div class="line">fn();</div></pre></td></tr></table></figure>
+</li>
+<li><p>new  Function()</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var fn1 = new Function(&apos;console.log(789);&apos;);</div><div class="line">fn1();</div></pre></td></tr></table></figure>
+<p><strong>Function中的字符串代码会自动转换成js代码。引申一点：eval(‘’);它把字符串转成js代码并执行。</strong></p>
+<p><strong>Math不是函数，而是对象</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>函数的调用方式（函数中的this指向取决于函数的调用方式）</p>
+<ul>
+<li><p>构造函数</p>
+</li>
+<li><p>普通函数</p>
+</li>
+<li><p>对象方法</p>
+</li>
+<li><p>call和apply调用(bind)</p>
+<ul>
+<li><p>bind方法是ES5的新特性（函数的柯里化）</p>
+</li>
+<li><p>bind用来改变函数内部的this指向，但是不调用函数，并且bind会返回一个新的函数（其实还是原来的函数内容，但是this变成了bind的第一个参数–必须是引用类型）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">实际用途：</div><div class="line">var inner = function(a,b)&#123;</div><div class="line">        console.log(a+b);</div><div class="line">    &#125;</div><div class="line">    var newInner = inner.bind(&#123;info:&apos;hello&apos;&#125;,12,13);</div><div class="line">    setTimeout(newInner,1000);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p>这里有一个小方法：</p>
+<p>对象.hasOwnProperty(属性名)：判断该对象里是否存在这个属性，但是只能判断自定义属性，系统自带的无法判断。</p>
+</li>
+<li><p>函数的属性</p>
+<ul>
+<li>arguments：表示实参的集合</li>
+<li>arguments.callee表示函数本身，但是不推荐使用</li>
+<li>length：形参的个数</li>
+<li>caller：该函数的调用者</li>
+<li>name：函数的名称</li>
+</ul>
+</li>
+</ol>
+<h2 id="数组与类数组"><a href="#数组与类数组" class="headerlink" title="数组与类数组"></a>数组与类数组</h2><ol>
+<li><p>delete的作用是删除对象的属性</p>
+<p>全局作用域中var声明的变量，delete无法删除，但是不用var声明的全局变量可以用delete删除。</p>
+</li>
+<li><p>类数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var obj = &#123;</div><div class="line">  0 : &apos;qqq&apos;,</div><div class="line">  1 : &apos;www&apos;,</div><div class="line">  2 : &apos;eee&apos;,</div><div class="line">  length : 3</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>类数组不可以使用数组的相关方法，因为类数组的本质是Object。</p>
+<p>但是我们可以把类数组转换成数组：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var obj = &#123;</div><div class="line">  0 : &apos;qqq&apos;,</div><div class="line">  1 : &apos;www&apos;,</div><div class="line">  2 : &apos;eee&apos;,</div><div class="line">  length : 3</div><div class="line">&#125;</div><div class="line">var arr = [].slice.call(obj,0);</div><div class="line">//var arr = [].slice.apply(obj,[0]);</div></pre></td></tr></table></figure>
+<p>引申出来的call和apply的应用场景：</p>
+<ul>
+<li>调用函数</li>
+<li>改变所调用函数的内部this指向</li>
+<li>转换类数组</li>
+<li>借用别的对象方法（Math.max.apply(null,arr)）</li>
+</ul>
+</li>
+</ol>
+<h2 id="this的不同指向"><a href="#this的不同指向" class="headerlink" title="this的不同指向"></a>this的不同指向</h2><ul>
+<li><p>构造函数中的this指向实例对象</p>
+</li>
+<li><p>原型方法中的this指向实例对象，于构造函数中的this指向相同</p>
+</li>
+<li><p>在非严格模式下，普通函数中的this指向window；严格模式下指向undefined</p>
+</li>
+<li><p>对象方法中的this就是调用方法的对象（实际上就是方法前面紧挨着的对象）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var obj = &#123;&#125;;</div><div class="line">    obj.obj1 = &#123;info : &apos;hello&apos;&#125;;</div><div class="line">    obj.obj1.showInfo = function()&#123;</div><div class="line">    	//this指的是obj1</div><div class="line">        console.log(this.info);</div><div class="line">    &#125;</div><div class="line">    obj.obj1.showInfo();</div></pre></td></tr></table></figure>
+</li>
+<li><p>事件方法中的this指的是绑定事件</p>
+</li>
+<li><p>定时函数中的this指的是window</p>
+</li>
+<li><p>call和apply所调用的函数中的this就是call或者apply的第一个参数（该参数必须是引用类型）</p>
+</li>
+</ul>
+<h2 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h2><ol>
+<li><p>作为参数的函数</p>
+<p>典型就是回调函数：自己定义的函数却不是自己控制调用的函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">function foo(p)&#123;</div><div class="line">	var dname = &apos;小苹果&apos;;</div><div class="line">	//这里是实参</div><div class="line">  	p.friend.dance(dname);</div><div class="line">&#125;</div><div class="line">var param = &#123;</div><div class="line">  username : &apos;lisi&apos;,</div><div class="line">  age : 22,</div><div class="line">  favour : [&apos;coding&apos;,&apos;singing&apos;],</div><div class="line">  friend : &#123;</div><div class="line">    fname : &apos;zhangsan&apos;,</div><div class="line">    age : 23,</div><div class="line">    //这里就是一个回调函数，自己定义的一个函数，但是调用的确实foo。方法里面传入的是形参。</div><div class="line">    dance : function(dname)&#123;</div><div class="line">      	console.log(&apos;dancing&apos;+dname);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">foo(param);</div></pre></td></tr></table></figure>
+<p>高阶回调函数实际应用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">$.each();的实现：</div><div class="line">function addIndex(tags,callback) &#123;</div><div class="line">    for(var i=0;i&lt;tags.length;i++)&#123;</div><div class="line">        callback.call(tags[i],tags[i],i);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">addIndex($(&quot;span&quot;),function (ele,index) &#123;</div><div class="line">    $(ele).html(index * 10);</div><div class="line">    $(ele).css(&#123;</div><div class="line">    &apos;display&apos;:&apos;block&apos;,</div><div class="line">    &apos;width&apos;:200+&apos;px&apos;,</div><div class="line">    &apos;height&apos;:50+&apos;px&apos;,</div><div class="line">    &apos;marginTop&apos;: 10+&apos;px&apos;,</div><div class="line">    &apos;backgroundColor&apos;:&apos;skyblue&apos;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>作为返回值的函数（闭包）</p>
+<ul>
+<li><p>作用域</p>
+<ul>
+<li><p>全局作用域</p>
+</li>
+<li><p>函数作用域</p>
+</li>
+<li><p>作用域链</p>
+<p>函数内层作用域可以访问外层作用域，但是反过来不可以，同层之间也不可以相互访问。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">var a = 10;</div><div class="line">    function foo()&#123;</div><div class="line">        var b = 20;</div><div class="line">        function fn()&#123;</div><div class="line">            var c = 30;</div><div class="line">            console.log(a + b + c);</div><div class="line">        &#125;</div><div class="line">        function fn1()&#123;</div><div class="line">            var d = 40;</div><div class="line">            console.log(a + b +d);</div><div class="line">            // console.log(c + d);</div><div class="line">        &#125;</div><div class="line">        fn1();</div><div class="line">        fn();</div><div class="line">    &#125;</div><div class="line">    foo();</div></pre></td></tr></table></figure>
+<p><img src="C:\前端\截图\02.bmp" alt="02"></p>
+</li>
+<li><p>js中没有块级作用域</p>
+</li>
+<li><p>预解析</p>
+<ol>
+<li><p>全局作用域预解析的时候，如果变量名称和函数名称相同，那么以函数为准。</p>
+</li>
+<li><p>function a(){}等价于var a=function(){};当你在下面var a = 10;操作的时候，会将a 重新赋值，因为js是弱语言。</p>
+</li>
+<li><p>全局作用域代码执行过程（先全局预解析，然后全局进行代码执行，当执行到函数调用的时候，在函数内部会先执行预解析，然后在执行函数内部的代码）</p>
+</li>
+<li><p>js运行分成两个阶段</p>
+<ul>
+<li><p>预解析</p>
+<p>全局预解析：所有的变量和函数声明都会提前，同名的函数和变量，函数的优先级高。</p>
+<p>函数内部预解析：所有的变量、函数、形参都会预解析：优先级：函数&gt;形参&gt;变量。</p>
+</li>
+<li><p>执行</p>
+<p>先预解析全局作用域，然后执行全局作用域中的代码，在执行全局代码的过程中遇到函数调用就会先进行函数预解析,然后再执行函数内的代码。</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>闭包</p>
+<ul>
+<li><p>可以理解为封闭的区域</p>
+</li>
+<li><p>函数的嵌套形成闭包：内层函数和内层函数所处的作用域。</p>
+</li>
+<li><p>闭包可以让你操作函数内部的变量（间接地）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">function foo()&#123;</div><div class="line">    var num = 1;</div><div class="line">    return function()&#123;</div><div class="line">        return ++num;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">var fn = foo();</div><div class="line">var ret = fn();</div><div class="line">//输出2</div><div class="line">console.log(ret);</div><div class="line">ret = fn();</div><div class="line">//输出3</div><div class="line">console.log(ret);</div></pre></td></tr></table></figure>
+</li>
+<li><p>闭包可以缓存中间状态值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">var arr = [];</div><div class="line">    for (var i = 0; i &lt; 3; i++) &#123;</div><div class="line">        arr[i] = function(num)&#123;</div><div class="line">            console.log(i);</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line">//结果3个3</div><div class="line">arr[0]();</div><div class="line">arr[1]();</div><div class="line">arr[2]();</div><div class="line">    </div><div class="line">    </div><div class="line">//缓存中间状态值实例</div><div class="line">var arr = [];</div><div class="line">    for (var i = 0; i &lt; 3; i++) &#123;</div><div class="line">        arr[i] = (function(num)&#123;</div><div class="line">            return function()&#123;</div><div class="line">                console.log(num);</div><div class="line">            &#125;</div><div class="line">        &#125;)(i);</div><div class="line">    &#125;</div><div class="line">//结果1.2.3</div><div class="line">arr[0]();</div><div class="line">arr[1]();</div><div class="line">arr[2]();</div></pre></td></tr></table></figure>
+<p>过程为：</p>
+<p><img src="C:\前端\截图\03.bmp" alt="03"></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><ol>
+<li><p>线程</p>
+<ul>
+<li>js中是单线程，但是浏览器本身是多线程（多进程）</li>
+<li>一个线程包括多个进程</li>
+<li>浏览器的工作<ul>
+<li>页面标签的渲染</li>
+<li>网络通信</li>
+<li>解析js的运行</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>事件队列</p>
+<ul>
+<li>队列中的放的任务实际上就是函数<ul>
+<li>定时函数（延时时间到了触发）</li>
+<li>事件函数（对应的事件触发）</li>
+<li>Ajax的回调函数（onreadystatechange所指向的函数，用于接收服务器完整的数据：readyState值发生变化的时候就触发）</li>
+</ul>
+</li>
+<li>事件队列中任务执行的条件<ul>
+<li>主线程空闲</li>
+<li>满足任务的触发条件</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>绑定事件的方式</p>
+<ul>
+<li><p>行内绑定</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div onclick=&quot;fn3();&quot;&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>给DOM元素直接绑定</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">btn.onclick=function()&#123;&#125;;</div></pre></td></tr></table></figure>
+</li>
+<li><p>addEventListener(事件，回调函数，是否冒泡)/attachEvent</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">div1.addEventListener(&apos;click&apos;,function()&#123;</div><div class="line">    console.log(11);</div><div class="line">&#125;,false);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>自定义事件</p>
+<p>当你为标签绑定一个没有的事件的时候还想要触发这个事件，可以用另一个存在的事件去出发它。这个事件也可以是这个标签自身的另一个事件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$(&apos;#btn&apos;).on(&apos;abc&apos;,function()&#123;</div><div class="line">  	console.log(&apos;123&apos;);</div><div class="line">&#125;);</div><div class="line">$(&apos;#btn1&apos;).on(&apos;click&apos;,function()&#123;</div><div class="line">	$(&apos;#btn&apos;).trigger(&apos;abc&apos;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>事件委托</p>
+<p>一个标签想要完成一个功能可以委托给另一个标签。</p>
+<ul>
+<li><p>在原生js中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//点击li标签获取里面的内容</div><div class="line">ul.onclick = function(event)&#123;</div><div class="line">      event = event || window.event;</div><div class="line">      var target = event.target || event.srcElement;</div><div class="line">      console.log(target.innerHTML);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>jQuery中通过on事件就可以实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(&apos;ul&apos;).on(&apos;click&apos;,&apos;li&apos;,function()&#123;&#125;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>阻止事件冒泡和默认事件</p>
+<ul>
+<li><p>阻止事件冒泡</p>
+<ul>
+<li><p>原生js中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">div2.onclick = function(event)&#123;</div><div class="line">	//浏览器兼容问题</div><div class="line">    event = event || window.event;</div><div class="line">    console.log(2);</div><div class="line">    if(event.stopPropagation)&#123;</div><div class="line">        event.stopPropagation();</div><div class="line">    &#125;else&#123;</div><div class="line">        event.cancelBubble = true;</div><div class="line">    &#125;</div><div class="line">//可以简写为            </div><div class="line">//event.stopPropagation?event.stopPropagation():event.cancelBubble=true;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>jQuery中</p>
+<p>return false就可以。这个方法不仅可以阻止冒泡也可以阻止默认行为。</p>
+</li>
+</ul>
+</li>
+<li><p>阻止默认事件</p>
+<ul>
+<li><p>原生js中</p>
+<p>return false只能阻止默认行为，不能阻止冒泡；只能阻止btn.onclick这种方式绑定的事件，不能阻止addEventListener绑定的事件。</p>
+<p>通过addEventListener绑定的可以这样阻止：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">a.onclick = function(e)&#123;</div><div class="line">    e = e || window.event;</div><div class="line">    if(e.preventDefault)&#123;</div><div class="line">        e.preventDefault();</div><div class="line">    &#125;else&#123;</div><div class="line">        e.returnValue = false;</div><div class="line">    &#125;</div><div class="line">	//可以连写</div><div class="line">    //e.preventDefault?e.preventDefault():e.returnValue=false</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>jQuery中</p>
+<p>return false就可以。这个方法不仅可以阻止冒泡也可以阻止默认行为。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/08/28/面向对象总结/" data-id="cj09lapeg0000g4wirg7gz6hf" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-ajax总结" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -390,7 +934,7 @@ XML的步骤
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/07/06/ajax总结/" data-id="cj09k7rk300005kwixzms8z9y" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/07/06/ajax总结/" data-id="cj09k7rk300005kwixzms8z9y" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -842,7 +1386,7 @@ XML的步骤
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/03/15/CSS3帮助手册/" data-id="ciy154981000090v1eocucyj8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/03/15/CSS3帮助手册/" data-id="ciy154981000090v1eocucyj8" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -1597,7 +2141,7 @@ XML的步骤
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/01/21/HTML+CSS3第一天/" data-id="ciy2zyh4s0000o4v15seme5qn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/01/21/HTML+CSS3第一天/" data-id="ciy2zyh4s0000o4v15seme5qn" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -1624,7 +2168,7 @@ XML的步骤
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li></ul>
     </div>
   </div>
 
@@ -1632,9 +2176,13 @@ XML的步骤
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/08/28/面向对象总结/">ajax总结</a>
+          </li>
         
           <li>
             <a href="/2016/07/06/ajax总结/">ajax总结</a>
@@ -1661,7 +2209,7 @@ XML的步骤
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 24kcsxpp<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
