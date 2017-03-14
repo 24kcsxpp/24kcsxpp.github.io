@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -60,6 +60,345 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-ajax总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/06/ajax总结/" class="article-date">
+  <time datetime="2016-07-05T16:00:00.000Z" itemprop="datePublished">2016-07-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/06/ajax总结/">ajax总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="ajax总结"><a href="#ajax总结" class="headerlink" title="ajax总结"></a>ajax总结</h1><h2 id="php"><a href="#php" class="headerlink" title="php"></a>php</h2><ol>
+<li><p>必须写在&lt;?php?&gt;中</p>
+</li>
+<li><p>可以定义变量，变量必须以$开头</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$username=&quot;zhangsan&quot;;</div></pre></td></tr></table></figure>
+</li>
+<li><p>php的特殊字符串，用来向客户端输出的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo $username;</div></pre></td></tr></table></figure>
+</li>
+<li><p>当文中输出中文的时候，为了解决乱码，可以加一个头文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">header(&quot;Content-Type:text/html;charset=utf-8&quot;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>php中有两种类型的数组</p>
+<ul>
+<li><p>普通数组</p>
+<p>通过array这个函数去定义。当我们想要遍历数组的时候，发现php中没有length这个属性，这个时候我们想要获取数组的长度就得使用count(数组名)来获取长度</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$array1=array(&quot;zhangsan&quot;,&quot;laoduan&quot;,&quot;lisi&quot;);</div><div class="line">    //遍历数组.，我们使用for 循环，数组并没有length 属性.</div><div class="line">    //我的目的是想获取到数组的长度.</div><div class="line">    //php 有一个函数是用来获取数组的长度</div><div class="line">    $length=count($array1);</div><div class="line">    for($i=0;$i&lt;$length;$i++)&#123;</div><div class="line">          echo $array1[$i];</div><div class="line">          echo &quot;&lt;br&gt;&quot;;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>关联数组</p>
+<p>通过键值对的方式来存储数据，也就是说数组里面的数据有关联关系</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$array2=array(&quot;username&quot;=&gt;&quot;zhangsan&quot;,&quot;age&quot;=&gt;11);</div><div class="line">    //根据key 去获取值.</div><div class="line">    echo $array2[&apos;username&apos;];</div><div class="line">    echo $array2[&apos;age&apos;];</div></pre></td></tr></table></figure>
+</li>
+<li><p>二维数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$array3=array(</div><div class="line">     array(&quot;username&quot;=&gt;&quot;周淑刚&quot;,&quot;age&quot;=&gt;13),</div><div class="line">     array(&quot;username&quot;=&gt;&quot;帅哥&quot;,&quot;age&quot;=&gt;14),</div><div class="line">     array(&quot;username&quot;=&gt;&quot;很帅&quot;,&quot;age&quot;=&gt;15)</div><div class="line">);</div><div class="line"></div><div class="line">for($i=0;$i&lt;count($array3);$i++)&#123;</div><div class="line">     echo $array3[$i][&apos;username&apos;];</div><div class="line">     echo $array3[$i][&apos;age&apos;];</div><div class="line">     echo &quot;&lt;br&gt;&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>在php中字符串的拼接使用.而不是+</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo &quot;小编&quot;.&quot;很帅&quot;;</div></pre></td></tr></table></figure>
+</li>
+<li><p>php中定义函数，调用函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//定义函数，调用函数.</div><div class="line">header(&quot;Content-Type:text/html;charset=utf-8&quot;);</div><div class="line">   //我可以给$username 添加一个默认值.</div><div class="line">   function doubleKill($username=&quot;,中国&quot;)&#123;</div><div class="line">       echo &quot;你好&quot;.$username;</div><div class="line">   &#125;</div><div class="line">doubleKill();</div></pre></td></tr></table></figure>
+</li>
+<li><p>php中常见的输出语句</p>
+<ul>
+<li>echo  这个是用来输出字符串的</li>
+<li>print_r()  用来输出数组或者对象的</li>
+<li>var_dump()  这个是用来输出数组里面的详细信息</li>
+</ul>
+</li>
+<li><p>php中常见的函数</p>
+<ul>
+<li>count  统计数组的长度(前文提到过)</li>
+<li>file_get_contents(文件)  读取一个文件里面的内容，读取出来的内容是字符串</li>
+<li>in_array(元素，数组)  判断数组中是否存在某个元素，这个是用在普通数组当中的</li>
+<li>array_key_exists(key,数组)  判断数组中是否存在某个key，这个是用在关联数组中的</li>
+</ul>
+</li>
+<li><p>Refresh响应头的介绍</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//表示5S过后自动跳转到该网址</div><div class="line">header(&quot;Refresh:5;url=http://m.youyuan.com&quot;);</div></pre></td></tr></table></figure>
+<p>但是有的浏览器不遵守这个协议，要自己写代码完成。</p>
+</li>
+</ol>
+<h2 id="GET提交方式"><a href="#GET提交方式" class="headerlink" title="GET提交方式"></a>GET提交方式</h2><ol>
+<li><p>get提交方式有哪些</p>
+<ul>
+<li>在地址栏输入地址发送请求</li>
+<li>点击超链接也属于get提交</li>
+<li>表单提交，默认是get提交</li>
+</ul>
+</li>
+<li><p>get方式提交的数据都是参数和参数值的方式，可以传递多个参数参数值，并且显示在地址栏，在第一对键值对前面用？，后续多个参数之间使用&amp;隔开。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;a href=&quot;01get.php?username=zhangsan&amp;age=11&quot;&gt;get 方式提交&lt;/a&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>上传的数据在目标地址中做了什么？</p>
+<ol>
+<li><p>接收数据，接收客户端传递到服务端的数据</p>
+</li>
+<li><p>应为是GET方式提交，所以就要用$_GET去接收数据，接收到之后，对应的值是一个数组，是一个关联数组。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$_GET=array(&quot;username&quot;=&gt;&quot;zhanngsan&quot;,&quot;age&quot;=&gt;11);## POST提交方式</div></pre></td></tr></table></figure>
+</li>
+<li><p>处理数据</p>
+</li>
+<li><p>返回数据</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="POST提交方式"><a href="#POST提交方式" class="headerlink" title="POST提交方式"></a>POST提交方式</h2><ol>
+<li><p>表单提交可以改成post提交方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;form action=&quot;&quot; method=&quot;post&quot;&gt;&lt;/form&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>后台用$_POST的方式去接收数据</p>
+</li>
+<li><p>关于POST提交方式的一个文件上传的小案例</p>
+<ul>
+<li>必须是表单提交</li>
+<li>表单里面必须有一个input标签的type=”file”</li>
+<li>必须是post提交方式</li>
+<li>必须给表单设置一个属性enctype=”multipart/form-data”</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;form action=&quot;01fileupload.php&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</div><div class="line">    &lt;input type=&quot;file&quot; name=&quot;lifephoto&quot; accept=&quot;image/jpeg&quot;&gt;</div><div class="line">    &lt;input type=&quot;submit&quot; value=&quot;提交上传的数据&quot;&gt;</div><div class="line">&lt;/form&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>后台接收表单提交的数据要用$_FILES接收</p>
+<p>这里上传的文件有一个临时存储的位置，如果你想要改变存储的位置可以使用move_uploaded_file(临时存储的位置，想要保存的位置)方法。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="http协议"><a href="#http协议" class="headerlink" title="http协议"></a>http协议</h2><ol>
+<li>http协议的数据格式分为两部分<ul>
+<li>客户端发送到服务器的请求，成为请求的数据格式</li>
+<li>服务器响应给客户端的数据，成为响应的数据格式</li>
+</ul>
+</li>
+<li>传递的数据格式<ul>
+<li>请求的数据格式(客户端发送给服务器)<ol>
+<li>请求首行：告诉服务器我要去请求的资源地址。并告诉HTTP协议的版本</li>
+<li>请求头：请求头的名称和请求头的值</li>
+<li>请求空行</li>
+<li>请求体</li>
+</ol>
+</li>
+<li>相应的数据格式(服务器响应给客户端)<ol>
+<li>响应首行：状态码<ul>
+<li>200   OK</li>
+<li>404   请求的资源没有找到</li>
+<li>500   服务器内部错误</li>
+<li>405   请求的方式不支持</li>
+<li>304   没变，请求的资源没有发生变化</li>
+<li>302   重定向</li>
+</ul>
+</li>
+<li>响应头</li>
+<li>响应空行</li>
+<li>响应体</li>
+</ol>
+</li>
+<li>get和post请求的区别<ol>
+<li>get 提交请求的数据都在地址栏中，相对来说不安全</li>
+<li>get 请求的数据都在请求地址后面，对请求的数据大小有限制，限制大概1kb</li>
+<li>get 没有请求体</li>
+<li>post 请求的数据在请求体当中，相对来说安全</li>
+<li>post 请求的数据大小没有限制。文件上传，这个必须是post方式提交</li>
+<li>post 提交有一个特殊的请求头：Content-Type:application/x-www-form-urlencode可以对请求的数据包含中文的数据进行编码</li>
+<li>get 比post 的请求头要少些，性能要高一些.</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="ajax"><a href="#ajax" class="headerlink" title="ajax"></a>ajax</h2><ol>
+<li><p>同步交互</p>
+<ul>
+<li>客户端请求服务器，服务器接收到请求，处理请求，然后给客户端一个响应。响应回来的数据会把原来的页面给覆盖。我们把这种交互称为同步交互。</li>
+</ul>
+</li>
+<li><p>异步交互</p>
+<ul>
+<li><p>客户端请求服务器，服务器接收到请求，处理请求，然后给客户端一个响应。响应回来的数据不会把原来的页面给覆盖掉。我们把这种交互称为异步交互。</p>
+</li>
+<li><p>异步交互实际上就是页面不刷新，就可以动态的去获取服务端的数据</p>
+<pre><code>原理
+xml（可扩展标记语言）：xml是数据格式，因为服务器跟客户端进行交互的时候，数据量太大，为了方便解析，就规定这样的一个格式，这是一个比较通用的数据格式，基本上任何语言里面都对他有支持
+XML的步骤
+</code></pre><ol>
+<li>创建这样的一个对象<pre><code>var xhe=new XMLHttpRequest();
+</code></pre><ol>
+<li>我要跟服务端建立一个链接<pre><code>xhr.open(&quot;GET&quot;,&quot;01ajax.php?username=chengjun&quot;);
+</code></pre><ol>
+<li>我要在连接上面发送数据，get方式发送数据，数据在地址的后面。如果是post，就将数据写在这一步里面（这一步不能省略）<br>xhr.send(null);</li>
+<li>接收服务端返回的数据<br>xhr.onreadystatechange=function(){}<br>在这个对象上面注册了一个回调函数，在服务器端响应数据的时候调用，监听服务器端状态的改变<br>xml语法</li>
+<li>文档声明，必须写在第一行</li>
+<li>有且仅有一个一个根元素</li>
+<li>标签可以嵌套，但是不能交叉嵌套</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="json"><a href="#json" class="headerlink" title="json"></a>json</h2><ol>
+<li>它是一种轻量级的数据格式，以更少的字符串来代表更多的数据</li>
+<li>json比xml更加轻量级，目前基本都用json</li>
+<li>json的格式/表示数据<ul>
+<li>以键值对的方式来表示数据  key：value</li>
+<li>表示一条数据 {“key”:value,”key”:value}</li>
+<li>表示多条数据 [{“key”:value,”key”:value}，{“key”:value,”key”:value}]</li>
+<li>key 对应得值可以是任意类型</li>
+</ul>
+</li>
+<li>json数据解析<ul>
+<li>js中有提供方法，将后台的json转换成对象<ul>
+<li>eval():  eval(“(“+json+”)”);  如果json格式有问题，转换会失败</li>
+<li>JSON.parse();</li>
+</ul>
+</li>
+<li>服务端：header(“Content-Type:text/json;charset=utf-8”)</li>
+</ul>
+</li>
+</ol>
+<h2 id="jQuery中的ajax操作"><a href="#jQuery中的ajax操作" class="headerlink" title="jQuery中的ajax操作"></a>jQuery中的ajax操作</h2><ol>
+<li><p>jQuery方法可以理解为两种类型</p>
+<ul>
+<li><p>全局方法（一般我要扩展的是工具方法，我就扩展全局方法）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$.ajax();   //全局方法</div><div class="line">$.ajax(&#123;</div><div class="line">	url:&quot;&quot;,</div><div class="line">	type:&quot;&quot;,</div><div class="line">	data:&quot;&quot;,</div><div class="line">	success:function(data)&#123;</div><div class="line">&#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>局部方法（扩展的方法要做页面上的DOM元素，就扩展局部方法）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(&quot;&quot;).show()  $(&quot;&quot;).attr()  这种称为局部方法</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>get 方法  用来发送get 请求的</p>
+</li>
+<li><p>post 方法  用来发送post 请求的</p>
+</li>
+<li><p>getScript 方法  用来载入一段远程的js代码</p>
+</li>
+<li><p>getJSON 方法  发送一个请求给后台，后台返回的数据必须是json格式的数据</p>
+</li>
+<li><p>load 方法  这个是用来载入一个页面</p>
+</li>
+<li><p>serialize方法，单词序列化 将表单里的数据拼接成字符串<br>serializeArray方法 序列化数组，将表单里面的内容组装成一个数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang=&quot;en&quot;&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</div><div class="line">    &lt;title&gt;Title&lt;/title&gt;</div><div class="line">    &lt;script src=&quot;js/jquery-1.12.4.js&quot;&gt;&lt;/script&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">&lt;form action=&quot;#&quot; id=&quot;formId&quot;&gt;</div><div class="line">     昵称：  &lt;input type=&quot;text&quot; id=&quot;username&quot; name=&quot;username&quot;&gt;&lt;br&gt;&lt;br&gt;</div><div class="line">     手机号：&lt;input type=&quot;text&quot; id=&quot;telephone&quot; name=&quot;telephone&quot;&gt;&lt;br&gt;&lt;br&gt;</div><div class="line">     邮箱：  &lt;input type=&quot;text&quot; id=&quot;email&quot; name=&quot;email&quot;&gt;&lt;br&gt;&lt;br&gt;</div><div class="line">     微信：  &lt;input type=&quot;text&quot; id=&quot;weixin&quot; name=&quot;weixin&quot;&gt;&lt;br&gt;&lt;br&gt;</div><div class="line">     &lt;input type=&quot;button&quot; value=&quot;ajax 提交&quot;&gt;</div><div class="line">&lt;/form&gt;</div><div class="line">&lt;script&gt;</div><div class="line">        $(&quot;input[type=button]&quot;).on(&quot;click&quot;,function()&#123;</div><div class="line">               //如果我要ajax 提交.</div><div class="line">               //我要获取表单项里面的数据.</div><div class="line">              //jQuery 给我们提供过来一个方法</div><div class="line">              //serialize 单词，序列化.</div><div class="line">              //调用这个方法，返回当前表单里面用户输入的数据.</div><div class="line">              //并且会拼接好字符串.</div><div class="line">              //var data=$(&quot;#formId&quot;).serialize();</div><div class="line">              //还有一个方法，跟这个方法类似，</div><div class="line">              //序列化数组，把当前表单里面的内容组装成一个数组.</div><div class="line">              var array=$(&quot;#formId&quot;).serializeArray();</div><div class="line">              console.log(array);</div><div class="line">             //alert(data);</div><div class="line">               $.ajax(&#123;</div><div class="line">                   type:&quot;post&quot;,</div><div class="line">                   data:array,</div><div class="line">                   url:&quot;07ajaxform.php&quot;,</div><div class="line">                   success:function(data)&#123;</div><div class="line">                         alert(data);</div><div class="line">                   &#125;</div><div class="line">               &#125;)</div><div class="line"></div><div class="line">        &#125;);</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="模板引擎"><a href="#模板引擎" class="headerlink" title="模板引擎"></a>模板引擎</h2><ol>
+<li><p>作用</p>
+<p>页面发送请求，服务器返回数据，返回的一般是json格式的数据，返回了之后<br>解析数据，解析了数据之后我们要将数据跟标签组装在一起，然后将数据放在页面上。</p>
+</li>
+<li><p>用法步骤</p>
+<ul>
+<li><p>导入文件</p>
+</li>
+<li><p>创建一个模板</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/template&quot;&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>准备模板内容，模板里的内容与页面上的数据有关系</p>
+</li>
+<li><p>将数据(这里要求一定是个对象)跟模板进行绑定，调用template()的方法去绑定</p>
+</li>
+<li><p>在模板里面解析数据</p>
+<p>模板提供了两种语法</p>
+<ul>
+<li>原生语法<ul>
+<li>&lt;% %&gt;这里面可以写js代码，主要是用来写逻辑代码</li>
+<li>&lt;%=%&gt;用来输出内容</li>
+</ul>
+</li>
+<li>简介语法</li>
+</ul>
+</li>
+<li><p>模板跟数据进行绑定之后，就会返回一个字符串，就要将这个字符串转换成对象在放到页面上对应的位置</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h2><ol>
+<li><p>什么是跨域：我访问a站点，得到一个网页，然后再a站点的网页想去访问b站点的资源，这个就是跨越。跨越是浏览器的一中安全限制，浏览器会禁止去访问b站点的资源。</p>
+</li>
+<li><p>如果域名、协议、端口都相同是可以访问的，不受限制。<br>端口、域名、协议有一个不相同就跨域了。</p>
+</li>
+<li><p>跨域的形式</p>
+<ul>
+<li><p>第一种跨域：一些公司有很多小系统，每个小系统又都有二级域名这时相互访问也是跨域，但是可以解决</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">比如：</div><div class="line">	在http://www.tianmao.com这个页面</div><div class="line">	想去访问http://11.tianmao.com这个页面</div><div class="line">	由于域名不同，所以跨域了</div><div class="line">	但是他们的主域名是相同的，所以可以通过设置</div><div class="line">	document.domain=&quot;tianmao.com&quot;</div><div class="line">	来解决这个问题(两个网页都要设置)</div></pre></td></tr></table></figure>
+</li>
+<li><p>第二种跨域</p>
+<ul>
+<li><p>当主域名也不相同的时候，我在这个页面下还是想用XMLHttpRequset对象去访问另外的站点的数据，这时形成了跨域。</p>
+</li>
+<li><p>我们使用jQuery的ajax方法来解决跨域，我们为ajax设置一个属性dataType：jsonp</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">原理：</div><div class="line">	当我们开起了dataType：jsonp的属性后，底层就会使用script标签去发送请求浏览器对XMLHttpRequest对象有跨域限制，但是对script标签没有限制。底层就可以建立一个script标签，script标签中的src=“”可以发送跨域请求的。我使用script标签发送请求了，服务器返回数据，浏览器直接解析，以js的方式去解析服务端返回的数据。</div><div class="line">	现在出现一问题，我使用script 标签给服务器发送请求，服务器返回的数据我在客户端怎么得到？下面来解释：</div><div class="line">	当我们开起了dataType：jsonp。jQuery底层就不会使用XMLHttpRequest对象发送请求，而是动态创建一个script标签发送请求，然后给服务端传递一个回调函数，这个回调函数的名称叫做callback在客户端定义一个回调函数。服务器端返回的是一个回调函数的调用。 数据做作为回调函数的参数传递过来的。</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>jsonp和cors跨域有什么不同（必须理解）</p>
+<ul>
+<li>jsonp<ol>
+<li>jsonp只能用get方式提交，cors都支持</li>
+<li>以后开发的过程中，肯定是采用jsonp多</li>
+<li>如果就从开发的角度来讲，我们直接$.ajax({dataType:”jsonp”,})就解决了</li>
+<li>jsonp底层通过script标签发送请求，发送到服务端一个回调函数，这个回掉函数的名称通常叫做callback，然后我们在客户端定义一个全局的回掉函数，服务器返回的是一个回调函数。会将服务端返回的数据作为回调函数的参数传递到客户端</li>
+<li>这个方式老牌的浏览器都支持jsonp 的方式。</li>
+</ol>
+</li>
+<li>cors<ol>
+<li>cors在服务区段设置一个响应头：Access-Control-allow-Origin:允许哪些站点可以访问</li>
+<li>但是一些老牌的浏览器不支持这个响应头:Access-Control-allow-Origin</li>
+<li>如果客户端发送到服务端的参数数据量大的时候必须开启post 跨域。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>iframe标签</p>
+<ul>
+<li><p>作用：在当前页面引入一个新的页面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;iframe id=&quot;iframeId&quot; height=&quot;1000&quot; frameborder=&quot;0&quot; src=&quot;地址&quot; width=&quot;100%&quot; &gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>可以通过获取该元素并修改引入页面的内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//前提是有修改权限</div><div class="line">&lt;script&gt;</div><div class="line">    //假设我要去获取iframe 里面的元素，我怎么去获取</div><div class="line">    var iframe=document.getElementById(&quot;iframeId&quot;);</div><div class="line">    //跨域了不能访问.</div><div class="line">    iframe.onload=function()&#123;</div><div class="line">    //去修改另外的一个站点的内容.</div><div class="line">    this.contentWindow.document.body.innerHTML=&quot;哈哈&quot;;</div><div class="line">    &#125;</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/07/06/ajax总结/" data-id="cj09k7rk300005kwixzms8z9y" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-CSS3帮助手册" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -503,7 +842,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/03/15/CSS3帮助手册/" data-id="ciy154981000090v1eocucyj8" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/03/15/CSS3帮助手册/" data-id="ciy154981000090v1eocucyj8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1258,7 +1597,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/01/21/HTML+CSS3第一天/" data-id="ciy2zyh4s0000o4v15seme5qn" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/01/21/HTML+CSS3第一天/" data-id="ciy2zyh4s0000o4v15seme5qn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1285,7 +1624,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li></ul>
     </div>
   </div>
 
@@ -1293,9 +1632,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/07/06/ajax总结/">ajax总结</a>
+          </li>
         
           <li>
             <a href="/2016/03/15/CSS3帮助手册/">html5+css3第二部分</a>
@@ -1318,7 +1661,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 24kcsxpp<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
